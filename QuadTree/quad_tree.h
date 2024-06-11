@@ -4,11 +4,11 @@
 #include "boundry.h"
 #include <vector>
 
-template <typename T> class QuadTree {
+template <class T> class QuadTree {
 public:
-  QuadTree(int w, int h);
-  QuadTree(Boundry _boundry);
-  QuadTree(float x, float y, int width, int height);
+  QuadTree(int w, int h, int cap = 1);
+  QuadTree(Boundry _boundry, int cap = 1);
+  QuadTree(float x, float y, int width, int height, int cap = 1);
 
   QuadTree(QuadTree &&) = default;
   QuadTree(const QuadTree &) = default;
@@ -21,9 +21,8 @@ public:
   std::vector<T> get_elements();
   std::vector<QuadTree<T> *> get_children();
 
-
 private:
-  static constexpr int CAP = 1;
+  const int CAP;
 
   Boundry boundry;
   QuadTree *root;

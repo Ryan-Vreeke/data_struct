@@ -1,14 +1,18 @@
 #include "quad_tree.h"
+#include <vector>
 
-template <typename T>
-QuadTree<T>::QuadTree(Boundry _boundry) : boundry(_boundry) {}
+template <class T>
+QuadTree<T>::QuadTree(Boundry _boundry, int cap)
+    : boundry(_boundry), CAP(cap) {}
 
-template <typename T>
-QuadTree<T>::QuadTree(float x, float y, int width, int height) : boundry(x, y, width, height) {}
+template <class T>
+QuadTree<T>::QuadTree(float x, float y, int width, int height, int cap)
+    : boundry(x, y, width, height), CAP(cap) {}
 
-template <typename T> QuadTree<T>::QuadTree(int w, int h) : boundry(0, 0, w, h) {}
+template <class T>
+QuadTree<T>::QuadTree(int w, int h, int cap) : boundry(0, 0, w, h), CAP(cap) {}
 
-template <typename T> QuadTree<T>::~QuadTree() {
+template <class T> QuadTree<T>::~QuadTree() {
   delete root;
   delete NE;
   delete NW;
@@ -16,11 +20,11 @@ template <typename T> QuadTree<T>::~QuadTree() {
   delete SW;
 }
 
-template <typename T> void QuadTree<T>::insert(T element) {
+template <class T> void QuadTree<T>::insert(T element) {
   if (!boundry.contains(element.x, element.y))
     return;
 
-  if (count < QuadTree::CAP) {
+  if (count < CAP) {
     elements.push_back(element);
     count++;
     return;
@@ -36,11 +40,11 @@ template <typename T> void QuadTree<T>::insert(T element) {
   SE->insert(element);
 }
 
-template <typename T> bool QuadTree<T>::divided() {
+template <class T> bool QuadTree<T>::divided() {
   return !(SE == nullptr && SW == nullptr && NE == nullptr && NW == nullptr);
 }
 
-template <typename T> void QuadTree<T>::split() {
+template <class T> void QuadTree<T>::split() {
   int new_w = boundry.w / 2;
   int new_h = boundry.h / 2;
 
@@ -50,12 +54,13 @@ template <typename T> void QuadTree<T>::split() {
   NW = new QuadTree<T>(boundry.x - (new_w / 2.0f), boundry.y + (new_h / 2.0f), new_w, new_h);
 }
 
-template<typename T> std::vector<T> QuadTree<T>::get_elements(){
+template <class T> std::vector<T> QuadTree<T>::get_elements(){
   return elements;
 }
 
-template<typename T> std::vector<QuadTree<T> *> QuadTree<T>::get_children(){
-  std::vector<QuadTree<T> *> children = new std::vector<QuadTree<T> *>();
+template <class T> std::vector<QuadTree<T> *> QuadTree<T>::get_children(){
+  std::vector<QuadTree<T> *> children;
+
   children.push_back(NE);
   children.push_back(NW);
   children.push_back(SE);
