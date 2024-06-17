@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall CMakeFiles/DSTest.dir/test.cpp.o CMakeFiles/DSTest.dir/home/ryan/Source/data_struct/QuadTree/boundry.cpp.o CMakeFiles/DSTest.dir/home/ryan/Source/data_struct/QuadTree/quad_tree.cpp.o -o DSTest  /usr/local/lib/libgtest.a -lpthread

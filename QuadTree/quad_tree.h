@@ -6,6 +6,8 @@
 
 template <class T> class QuadTree {
 public:
+  Boundry boundry;
+
   QuadTree(int w, int h, int cap = 1);
   QuadTree(Boundry _boundry, int cap = 1);
   QuadTree(float x, float y, int width, int height, int cap = 1);
@@ -18,13 +20,14 @@ public:
 
   void insert(T element);
   void split();
+  bool divided();
+
   std::vector<T> get_elements();
   std::vector<QuadTree<T> *> get_children();
 
 private:
   const int CAP;
 
-  Boundry boundry;
   QuadTree *root;
 
   QuadTree *NW = nullptr;
@@ -33,9 +36,6 @@ private:
   QuadTree *SE = nullptr;
 
   std::vector<T> elements;
-  int count = 0;
-
-  bool divided();
 };
 
 #endif
