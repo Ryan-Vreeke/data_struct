@@ -6,15 +6,9 @@ Boundry::Boundry(float _x, float _y, int _w, int _h)
 Boundry::~Boundry() {}
 
 bool Boundry::contains(int x, int y) {
-  if (x < this->x - w || x > this->x + w || y < this->y - h || y > this->y + h)
-    return false;
+  float hW = w / 2.0f;
+  float hH = h / 2.0f;
 
-  return true;
+  return !(x < this->x - hW || x > this->x + hW || y < this->y - hH || y > this->y + hH);
 }
 
-bool Boundry::contains(float x, float y) {
-  if (x < this->x - w || x > this->x + w || y < this->y - h || y > this->y + h)
-    return false;
-
-  return true;
-}

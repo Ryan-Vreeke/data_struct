@@ -25,15 +25,14 @@ public:
   std::vector<T> get_elements();
   std::vector<QuadTree<T> *> get_children();
 
-private:
-  const int CAP;
-
-  QuadTree *root;
 
   QuadTree *NW = nullptr;
   QuadTree *NE = nullptr;
   QuadTree *SW = nullptr;
   QuadTree *SE = nullptr;
+
+private:
+  const int CAP;
 
   std::vector<T> elements;
 };

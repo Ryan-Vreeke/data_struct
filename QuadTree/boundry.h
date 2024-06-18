@@ -17,7 +17,7 @@ public:
   ~Boundry();
 
   bool contains(int x, int y);
-  bool contains(float x, float y);
+  // bool contains(float x, float y);
 
 private:
   
