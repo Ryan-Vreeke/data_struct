@@ -23,9 +23,10 @@ template <class T> void QuadTree<T>::insert(T element) {
   if (!boundry.contains(element.x, element.y))
     return;
 
-  elements.push_back(element);
+  if (elements.size() < CAP) {
+    elements.push_back(element);
 
-  if (elements.size() > CAP) {
+  } else {
     if (!divided()) {
       split();
     }
@@ -45,10 +46,21 @@ template <class T> void QuadTree<T>::split() {
   int new_w = boundry.w / 2;
   int new_h = boundry.h / 2;
 
-  NE = new QuadTree<T>(boundry.x + (new_w / 2.0f), boundry.y + (new_h / 2.0f), new_w, new_h);
-  SE = new QuadTree<T>(boundry.x + (new_w / 2.0f), boundry.y - (new_h / 2.0f), new_w, new_h);
-  SW = new QuadTree<T>(boundry.x - (new_w / 2.0f), boundry.y - (new_h / 2.0f), new_w, new_h);
-  NW = new QuadTree<T>(boundry.x - (new_w / 2.0f), boundry.y + (new_h / 2.0f), new_w, new_h);
+  NE = new QuadTree<T>(boundry.x + (new_w / 2.0f), boundry.y + (new_h / 2.0f),
+                       new_w, new_h);
+  SE = new QuadTree<T>(boundry.x + (new_w / 2.0f), boundry.y - (new_h / 2.0f),
+                       new_w, new_h);
+  SW = new QuadTree<T>(boundry.x - (new_w / 2.0f), boundry.y - (new_h / 2.0f),
+                       new_w, new_h);
+  NW = new QuadTree<T>(boundry.x - (new_w / 2.0f), boundry.y + (new_h / 2.0f),
+                       new_w, new_h);
+
+  for (auto element : elements) {
+    NE->insert(element);
+    NW->insert(element);
+    SW->insert(element);
+    SE->insert(element);
+  }
 }
 
 template <class T> std::vector<T> QuadTree<T>::get_elements() {
