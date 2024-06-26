@@ -10,10 +10,11 @@ typedef struct {
 int main(int argc, char *argv[]) {
   QuadTree<point_t> qt{100, 100};
 
-  qt.insert({1.0, 1.0});
-  qt.insert({-1.0f, -1.0f});
+  qt.insert({49,49});
+  qt.insert({1,1});
 
-  qt.NE->get_elements();
+  QuadTree<point_t> *ne = qt.NE;
 
+  std::cout << ne->boundry.x << std::endl;
   return 0;
 }

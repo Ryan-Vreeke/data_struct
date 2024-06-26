@@ -63,19 +63,21 @@ TEST_F(QuadTreeTest, DividedTest){
 }
 
 TEST_F(QuadTreeTest, BoundryTest){
-  quadTree->insert({51,51});
+  quadTree->insert({49, 49});
   quadTree->insert({1,1});
 
-  // EXPECT_EQ(quadTree->NE->boundry.x, 25); 
-  // EXPECT_EQ(quadTree->NW->boundry.x, -25); 
-  // EXPECT_EQ(quadTree->SE->boundry.x, 25); 
-  // EXPECT_EQ(quadTree->SW->boundry.x, -25); 
-  // //
-  // EXPECT_EQ(quadTree->NE->boundry.y, 25); 
-  // EXPECT_EQ(quadTree->NW->boundry.y, 25); 
-  // EXPECT_EQ(quadTree->SE->boundry.y, -25); 
-  // EXPECT_EQ(quadTree->SW->boundry.y, -25); 
+  EXPECT_EQ(quadTree->NE->boundry.x, 25); 
+  EXPECT_EQ(quadTree->NW->boundry.x, -25); 
+  EXPECT_EQ(quadTree->SE->boundry.x, 25); 
+  EXPECT_EQ(quadTree->SW->boundry.x, -25); 
+  //
+  EXPECT_EQ(quadTree->NE->boundry.y, 25); 
+  EXPECT_EQ(quadTree->NW->boundry.y, 25); 
+  EXPECT_EQ(quadTree->SE->boundry.y, -25); 
+  EXPECT_EQ(quadTree->SW->boundry.y, -25); 
 }
+
+// TEST(BoundryName, test_name)
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

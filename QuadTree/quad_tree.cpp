@@ -2,12 +2,10 @@
 #include <vector>
 
 template <class T>
-QuadTree<T>::QuadTree(Boundry _boundry, int cap)
-    : boundry(_boundry), CAP(cap) {}
+QuadTree<T>::QuadTree(Boundry _boundry, int cap) : boundry(_boundry), CAP(cap) {}
 
 template <class T>
-QuadTree<T>::QuadTree(float x, float y, int width, int height, int cap)
-    : boundry(x, y, width, height), CAP(cap) {}
+QuadTree<T>::QuadTree(float x, float y, int width, int height, int cap) : boundry(x, y, width, height), CAP(cap) {}
 
 template <class T>
 QuadTree<T>::QuadTree(int w, int h, int cap) : boundry(0, 0, w, h), CAP(cap) {}
@@ -31,6 +29,7 @@ template <class T> void QuadTree<T>::insert(T element) {
       split();
     }
 
+    elements.push_back(element);
     NE->insert(element);
     NW->insert(element);
     SW->insert(element);
