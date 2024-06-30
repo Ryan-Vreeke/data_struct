@@ -1,14 +1,21 @@
 #include "quad_tree.h"
+#include "boundry.h"
 #include <vector>
 
 template <class T>
-QuadTree<T>::QuadTree(Boundry _boundry, int cap) : boundry(_boundry), CAP(cap) {}
+QuadTree<T>::QuadTree(Boundry _boundry, int cap)
+    : boundry(_boundry), CAP(cap) {}
 
 template <class T>
-QuadTree<T>::QuadTree(float x, float y, int width, int height, int cap) : boundry(x, y, width, height), CAP(cap) {}
+QuadTree<T>::QuadTree(float x, float y, int width, int height, int cap)
+    : boundry(x, y, width, height), CAP(cap) {}
 
 template <class T>
 QuadTree<T>::QuadTree(int w, int h, int cap) : boundry(0, 0, w, h), CAP(cap) {}
+
+template <class T>
+QuadTree<T>::QuadTree(float w, float h, int cap)
+    : boundry(0.0f, 0.0f, w, h), CAP(cap) {}
 
 template <class T> QuadTree<T>::~QuadTree() {
   delete NE;
@@ -42,17 +49,13 @@ template <class T> bool QuadTree<T>::divided() {
 }
 
 template <class T> void QuadTree<T>::split() {
-  int new_w = boundry.w / 2;
-  int new_h = boundry.h / 2;
+  float new_w = boundry.w / 2.0f;
+  float new_h = boundry.h / 2.0f;
 
-  NE = new QuadTree<T>(boundry.x + (new_w / 2.0f), boundry.y + (new_h / 2.0f),
-                       new_w, new_h);
-  SE = new QuadTree<T>(boundry.x + (new_w / 2.0f), boundry.y - (new_h / 2.0f),
-                       new_w, new_h);
-  SW = new QuadTree<T>(boundry.x - (new_w / 2.0f), boundry.y - (new_h / 2.0f),
-                       new_w, new_h);
-  NW = new QuadTree<T>(boundry.x - (new_w / 2.0f), boundry.y + (new_h / 2.0f),
-                       new_w, new_h);
+  NE = new QuadTree<T>((float)(boundry.x + (new_w / 2.0f)), (float)(boundry.y + (new_h / 2.0f)), new_w, new_h);
+  SE = new QuadTree<T>((float)(boundry.x + (new_w / 2.0f)), (float)(boundry.y - (new_h / 2.0f)), new_w, new_h);
+  SW = new QuadTree<T>((float)(boundry.x - (new_w / 2.0f)), (float)(boundry.y - (new_h / 2.0f)), new_w, new_h);
+  NW = new QuadTree<T>((float)(boundry.x - (new_w / 2.0f)), (float)(boundry.y + (new_h / 2.0f)), new_w, new_h);
 
   for (auto element : elements) {
     NE->insert(element);

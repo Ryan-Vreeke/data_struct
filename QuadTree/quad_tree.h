@@ -9,6 +9,7 @@ public:
   Boundry boundry;
 
   QuadTree(int w, int h, int cap = 1);
+  QuadTree(float w, float h, int cap = 1);
   QuadTree(Boundry _boundry, int cap = 1);
   QuadTree(float x, float y, int width, int height, int cap = 1);
 
@@ -25,14 +26,13 @@ public:
   std::vector<T> get_elements();
   std::vector<QuadTree<T> *> get_children();
 
-
   QuadTree *NW = nullptr;
   QuadTree *NE = nullptr;
   QuadTree *SW = nullptr;
   QuadTree *SE = nullptr;
 
 private:
-  const int CAP;
+  const unsigned int CAP;
 
   std::vector<T> elements;
 };

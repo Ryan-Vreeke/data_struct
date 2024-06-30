@@ -3,12 +3,12 @@
 
 class Boundry {
 public:
-  int w;
-  int h;
+  float w;
+  float h;
   float x;
   float y;
 
-  Boundry(float _x, float _y, int _w, int _h);
+  Boundry(float _x, float _y, float _w, float _h);
   Boundry(Boundry &&) = default;
   Boundry(const Boundry &) = default;
   Boundry &operator=(Boundry &&) = default;
@@ -20,7 +20,6 @@ public:
 
   ~Boundry();
 
-  bool contains(int x, int y);
   bool contains(float x, float y);
 
 private:

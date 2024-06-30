@@ -77,7 +77,22 @@ TEST_F(QuadTreeTest, BoundryTest){
   EXPECT_EQ(quadTree->SW->boundry.y, -25); 
 }
 
-// TEST(BoundryName, test_name)
+TEST(BoundryName, FloatBoundries){
+  QuadTree<point_t> qt{1.0f, 1.0f};
+  Boundry b = qt.boundry;
+
+  EXPECT_EQ(b.x, 0.0f);
+
+  qt.insert({0.1f, 0.1f});
+  qt.insert({-0.25f, -0.25f});
+
+  auto nw = qt.NW;
+  auto ne = qt.NE;
+
+  EXPECT_EQ(nw->boundry.x, -0.25f);
+  EXPECT_EQ(nw->boundry.y, 0.25f);
+  EXPECT_EQ(ne->boundry.x, 0.25f);
+}
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
