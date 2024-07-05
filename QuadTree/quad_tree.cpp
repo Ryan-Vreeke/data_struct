@@ -93,12 +93,21 @@ template <class T> std::vector<T> QuadTree<T>::find(float x, float y) {
     return elements;
   }
 
-  std::vector<T> rtn_elements;
+  if (NE->boundry.contains(x, y)) {
+    return NE->find(x, y);
+  }
 
-  rtn_elements.insert(rtn_elements.end(), NE->find(x, y).begin(), NE->find(x, y).end());
-  rtn_elements.insert(rtn_elements.end(), NW->find(x, y).begin(), NW->find(x, y).end());
-  rtn_elements.insert(rtn_elements.end(), SE->find(x, y).begin(), SE->find(x, y).end());
-  rtn_elements.insert(rtn_elements.end(), SW->find(x, y).begin(), SW->find(x, y).end());
+  if (NW->boundry.contains(x, y)) {
+    return NW->find(x, y);
+  }
 
-  return rtn_elements;
+  if (SE->boundry.contains(x, y)) {
+    return SE->find(x, y);
+  }
+
+  if (SW->boundry.contains(x, y)) {
+    return SW->find(x, y);
+  }
+
+  return std::vector<T>{};
 }

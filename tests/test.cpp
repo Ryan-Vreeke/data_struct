@@ -101,6 +101,16 @@ TEST_F(QuadTreeTest, SimpleFindTest){
   EXPECT_EQ(points.size(), 1);
 }
 
+TEST_F(QuadTreeTest, FindTest){
+  quadTree->insert({1.0f, 1.0f});
+  quadTree->insert({-1.0f, -1.0f});
+
+
+  std::vector<point_t> points = quadTree->find(25.0f, 25.0f);
+
+  EXPECT_EQ(points.size(), 1);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
