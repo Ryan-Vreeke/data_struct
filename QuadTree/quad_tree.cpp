@@ -52,10 +52,14 @@ template <class T> void QuadTree<T>::split() {
   float new_w = boundry.w / 2.0f;
   float new_h = boundry.h / 2.0f;
 
-  NE = new QuadTree<T>((float)(boundry.x + (new_w / 2.0f)), (float)(boundry.y + (new_h / 2.0f)), new_w, new_h);
-  SE = new QuadTree<T>((float)(boundry.x + (new_w / 2.0f)), (float)(boundry.y - (new_h / 2.0f)), new_w, new_h);
-  SW = new QuadTree<T>((float)(boundry.x - (new_w / 2.0f)), (float)(boundry.y - (new_h / 2.0f)), new_w, new_h);
-  NW = new QuadTree<T>((float)(boundry.x - (new_w / 2.0f)), (float)(boundry.y + (new_h / 2.0f)), new_w, new_h);
+  NE = new QuadTree<T>((float)(boundry.x + (new_w / 2.0f)),
+                       (float)(boundry.y + (new_h / 2.0f)), new_w, new_h);
+  SE = new QuadTree<T>((float)(boundry.x + (new_w / 2.0f)),
+                       (float)(boundry.y - (new_h / 2.0f)), new_w, new_h);
+  SW = new QuadTree<T>((float)(boundry.x - (new_w / 2.0f)),
+                       (float)(boundry.y - (new_h / 2.0f)), new_w, new_h);
+  NW = new QuadTree<T>((float)(boundry.x - (new_w / 2.0f)),
+                       (float)(boundry.y + (new_h / 2.0f)), new_w, new_h);
 
   for (auto element : elements) {
     NE->insert(element);
@@ -78,4 +82,23 @@ template <class T> std::vector<QuadTree<T> *> QuadTree<T>::get_children() {
   children.push_back(SW);
 
   return children;
+}
+
+template <class T> std::vector<T> QuadTree<T>::find(float x, float y) {
+  if (!boundry.contains(x, y)) {
+    return std::vector<T>{};
+  }
+
+  if (!divided()) {
+    return elements;
+  }
+
+  std::vector<T> rtn_elements;
+
+  rtn_elements.insert(rtn_elements.end(), NE->find(x, y).begin(), NE->find(x, y).end());
+  rtn_elements.insert(rtn_elements.end(), NW->find(x, y).begin(), NW->find(x, y).end());
+  rtn_elements.insert(rtn_elements.end(), SE->find(x, y).begin(), SE->find(x, y).end());
+  rtn_elements.insert(rtn_elements.end(), SW->find(x, y).begin(), SW->find(x, y).end());
+
+  return rtn_elements;
 }

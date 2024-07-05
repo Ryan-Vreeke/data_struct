@@ -94,6 +94,13 @@ TEST(BoundryName, FloatBoundries){
   EXPECT_EQ(ne->boundry.x, 0.25f);
 }
 
+TEST_F(QuadTreeTest, SimpleFindTest){
+  quadTree->insert({1.0f, 1.0f});
+  std::vector<point_t> points = quadTree->find(25.0f, 25.0f);
+
+  EXPECT_EQ(points.size(), 1);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

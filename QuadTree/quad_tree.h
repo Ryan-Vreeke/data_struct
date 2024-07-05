@@ -22,6 +22,7 @@ public:
   void insert(T element);
   void split();
   bool divided();
+  std::vector<T> find(float x, float y);  
 
   std::vector<T> get_elements();
   std::vector<QuadTree<T> *> get_children();

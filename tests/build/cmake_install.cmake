@@ -1,4 +1,4 @@
-# Install script for directory: /home/ryan/source/data_struct/tests
+# Install script for directory: /home/ryan/Source/data_struct/tests
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ryan/source/data_struct/tests/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ryan/Source/data_struct/tests/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
